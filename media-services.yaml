@@ -1,0 +1,47 @@
+---
+version: "3"
+
+services:
+  rutorrent:
+    image: ghcr.io/linuxserver/rutorrent
+    container_name: rutorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /host_path/torrent/config:/config
+      - /host_path/torrent/downloads:/downloads
+    ports:
+      - 8180:80
+      - 5000:5000
+      - 51413:51413
+      - 6881:6881/udp
+    deploy:
+        resources:
+            limits:
+              memory: 512M
+            reservations:
+              memory: 128M
+    restart: always
+
+  plex:
+    image: linuxserver/plex:bionic
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+      - UMASK_SET=022 #optional
+      - PLEX_CLAIM= #optional
+    volumes:
+      - /host_path/plex/library:/config
+      - /host_path/plex/tvseries:/tv
+      - /host_path/plex/movies:/movies
+    deploy:
+        resources:
+            limits:
+              memory: 512M
+            reservations:
+              memory: 128M
+    restart: always
