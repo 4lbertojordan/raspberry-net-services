@@ -11,6 +11,17 @@ Includes:</br>
 ```bash
 docker-compose -f net-services.yaml -p net-services up -d
 ```
+## WHOOGLE
+
+Add more privacy to your searchs
+
+Includes:</br>
+* whoogle search
+
+```bash
+docker-compose -f whoogle.yaml -p whoogle up -d
+```
+
 ## MEDIA SERVICES
 
 Only to check the performance on Raspberry Pi 4. Actually not installed on my Raspi.
